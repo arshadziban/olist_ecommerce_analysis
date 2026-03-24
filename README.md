@@ -3,7 +3,7 @@
 
 <div align="center">
 
-![Dashboard Preview](assets/dashboard.jpg)
+![Dashboard Preview](dashboard/dashboard.jpg)
 
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
