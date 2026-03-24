@@ -153,4 +153,3 @@ venv.bak/
 *.csv
 *.pbix
 
-# End of https://www.toptal.com/developers/gitignore/api/python,jupyter-notebooks,virtualenv,visualstudiocode
