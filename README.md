@@ -1,7 +1,8 @@
 # E-Commerce Cohort Retention & Revenue Analysis
-### Brazilian Olist Dataset · SQL Server · Power BI · Python
+## Dashboard
 
 <div align="center">
+
 
 ![Dashboard Preview](dashboard/dashboard.jpg)
 
