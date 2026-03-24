@@ -65,18 +65,31 @@ olist-ecommerce-analysis/
 │   ├── 03_rfm_segmentation.sql    # RFM scoring + customer segmentation
 │   └── 04_revenue_analysis.sql    # Monthly revenue, MoM growth, category breakdown
 │
-├── python/
-│   └── load_data.py               # Load all CSVs into SQL Server via SQLAlchemy
+├── eda/
+│   ├── 01_eda.ipynb               # Exploratory data analysis
+│   └── 02_export_for_bi.ipynb     # Data export for Power BI
 │
 ├── dashboard/
-│   └── olist_dashboard.pbix       # Power BI dashboard file
+│   ├── dashboard.pbix             # Power BI dashboard file
+│   ├── dashboard.jpg              # Dashboard screenshot
+│   └── olist_clean_dataset.csv    # Clean dataset for Power BI
 │
-├── memo/
-│   └── executive_memo.docx        # 1-page executive memo with findings & recommendations
+├── data/
+│   ├── olist_customers_dataset.csv
+│   ├── olist_orders_dataset.csv
+│   ├── olist_order_items_dataset.csv
+│   ├── olist_order_payments_dataset.csv
+│   ├── olist_products_dataset.csv
+│   ├── olist_sellers_dataset.csv
+│   ├── olist_geolocation_dataset.csv
+│   ├── olist_order_reviews_dataset.csv
+│   └── product_category_name_translation.csv
 │
-├── assets/
-│   └── dashboard.jpg              # Dashboard screenshot
+├── Memo/
+│   └── executive_memo_final.pdf   # Executive memo with findings & recommendations
 │
+├── convert_to_sql.ipynb           # Data import script for SQL Server
+├── dataset_link.txt               # Link to raw dataset
 └── README.md
 ```
 
@@ -103,7 +116,11 @@ olist-ecommerce-analysis/
 - Power BI Desktop (free)
 - [Olist dataset from Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
-### Step 1 — Set up the database
+### Step 1 — Download and prepare the data
+
+Download the dataset from [Kaggle - Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and extract all CSV files to the `data/` folder.
+
+### Step 2 — Set up the database
 
 ```sql
 -- Run in SSMS
@@ -111,40 +128,18 @@ USE master;
 CREATE DATABASE olist_db;
 ```
 
-Then run `sql/01_schema.sql` to create all 5 tables.
+Then run `sql/01_schema.sql` to create all tables.
 
-### Step 2 — Load the data
+### Step 3 — Load the data
+
+Use the `convert_to_sql.ipynb` notebook to load all CSV files into SQL Server:
 
 ```bash
-pip install pandas sqlalchemy pyodbc
+pip install pandas sqlalchemy pyodbc jupyter
+jupyter notebook convert_to_sql.ipynb
 ```
 
-```python
-# python/load_data.py
-import pandas as pd
-from sqlalchemy import create_engine
-
-engine = create_engine(
-    "mssql+pyodbc://localhost/olist_db"
-    "?driver=ODBC+Driver+17+for+SQL+Server"
-    "&trusted_connection=yes"
-)
-
-tables = {
-    'customers':      'data/olist_customers_dataset.csv',
-    'orders':         'data/olist_orders_dataset.csv',
-    'order_items':    'data/olist_order_items_dataset.csv',
-    'order_payments': 'data/olist_order_payments_dataset.csv',
-    'products':       'data/olist_products_dataset.csv',
-}
-
-for table, path in tables.items():
-    df = pd.read_csv(path, dtype=str)
-    df.to_sql(table, engine, if_exists='replace', index=False, chunksize=1000)
-    print(f"{table}: {len(df):,} rows loaded")
-```
-
-### Step 3 — Run the SQL analysis
+### Step 4 — Run the SQL analysis
 
 Run each file in SSMS in order:
 
@@ -155,6 +150,10 @@ sql/04_revenue_analysis.sql   →  Monthly revenue with MoM growth
 ```
 
 > **Note:** All timestamp columns are stored as `VARCHAR` and cast to `DATETIME` inside queries. All numeric columns use `CAST(... AS DECIMAL(10,2))` to handle the `VARCHAR` load.
+
+### Step 5 — Explore the dashboard
+
+Open `dashboard/dashboard.pbix` in Power BI Desktop and update the data source connection to point to your local SQL Server instance.
 
 ---
 
@@ -169,8 +168,6 @@ sql/04_revenue_analysis.sql   →  Monthly revenue with MoM growth
 ---
 
 ## Executive Memo Summary
-
-**Situation:** 99K delivered orders, R$20.31M gross revenue, 2017–2018.
 
 **Findings:**
 1. Month-1 retention < 5% across all cohorts (benchmark: 20–25%)
