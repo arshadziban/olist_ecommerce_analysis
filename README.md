@@ -1,19 +1,4 @@
 # E-Commerce Cohort Retention & Revenue Analysis
-## Dashboard
-
-<div align="center">
-
-
-![Dashboard Preview](dashboard/dashboard.jpg)
-
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
-[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
-
-</div>
-
----
 
 ## Project Overview
 
@@ -26,6 +11,23 @@ A **full-stack data analytics portfolio project** analysing 99,441 delivered ord
 The entire pipeline runs from raw CSV data → SQL Server → Power BI dashboard → executive memo — mirroring how a real data analyst operates inside a company.
 
 ---
+
+## Dashboard
+
+<div align="center">
+
+![Dashboard Preview](dashboard/dashboard.jpg)
+
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/en-us/sql-server)
+[![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+
+</div>
+
+---
+
+
 
 ## Key Findings
 
