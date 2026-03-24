@@ -108,55 +108,6 @@ olist-ecommerce-analysis/
 
 ---
 
-## How to Reproduce
-
-### Prerequisites
-- SQL Server + SSMS installed
-- Python 3.8+ with `pandas`, `sqlalchemy`, `pyodbc`
-- Power BI Desktop (free)
-- [Olist dataset from Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-
-### Step 1 — Download and prepare the data
-
-Download the dataset from [Kaggle - Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and extract all CSV files to the `data/` folder.
-
-### Step 2 — Set up the database
-
-```sql
--- Run in SSMS
-USE master;
-CREATE DATABASE olist_db;
-```
-
-Then run `sql/01_schema.sql` to create all tables.
-
-### Step 3 — Load the data
-
-Use the `convert_to_sql.ipynb` notebook to load all CSV files into SQL Server:
-
-```bash
-pip install pandas sqlalchemy pyodbc jupyter
-jupyter notebook convert_to_sql.ipynb
-```
-
-### Step 4 — Run the SQL analysis
-
-Run each file in SSMS in order:
-
-```
-sql/02_cohort_retention.sql   →  Cohort × Month retention heatmap
-sql/03_rfm_segmentation.sql   →  RFM scores + segment labels per customer
-sql/04_revenue_analysis.sql   →  Monthly revenue with MoM growth
-```
-
-> **Note:** All timestamp columns are stored as `VARCHAR` and cast to `DATETIME` inside queries. All numeric columns use `CAST(... AS DECIMAL(10,2))` to handle the `VARCHAR` load.
-
-### Step 5 — Explore the dashboard
-
-Open `dashboard/dashboard.pbix` in Power BI Desktop and update the data source connection to point to your local SQL Server instance.
-
----
-
 ## Dashboard Pages
 
 | Page | Visuals |
